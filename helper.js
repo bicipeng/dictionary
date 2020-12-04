@@ -1,21 +1,22 @@
 //functions here are use to extrace data from nested obj return from the oxfor dict API
 let output =[]
-const extraData  = (inputObj,str ="definition ") =>{
+let lex=""
+var extractDetail  = (inputObj) =>{
 for(let key in inputObj){
     let obj=inputObj[key]
     if(Array.isArray(obj)){
         for( ele of obj){
-            extractDefinition(ele)
+            extractDetail(ele)
         }
     }
 }
-if(inputObj[str]){
-    output=output.concat(inputObj[str])
-}else{
-    //can't find the data 
-    output.push("null")
+if(inputObj["definitions"]){
+    output=output.concat(inputObj["definitions"])
 }
-return output
+if (inputObj["lexicalCategory"]){
+    lex+=inputObj["lexicalCategory"].id
+}
+return [output,lex]
 }
 
-export default extractDefinition;
+export default extractDetail

@@ -23,13 +23,14 @@ class Cover extends Component {
 
     async handleSubmit() {
         try {
-            console.log("checking input", this.state.input)
+            
             const res = await axios.get(`http://localhost:5000/${this.state.input}`)
             if (res.status === 200) {
+               
                 this.setState({
                     definition: [...this.state.definition, res.data],
                     word: this.state.input,
-                    input:""
+                    input: ""
 
                 })
             }
@@ -80,13 +81,13 @@ class Cover extends Component {
 
     render() {
 
+        const definition = this.state.definition
+        const word = this.state.word
         return (<div className="search">
 
             <input onChange={this.handleChange} placeholder="serach ..." />
             <button onClick={this.handleSubmit}><i class="fas fa-search"></i></button>
-
-            <Definition word={this.state.word} definition={this.state.definition} />
-
+            {definition && word ? <Definition definition={definition} word={word} /> : null}
         </div>);
     }
 }
