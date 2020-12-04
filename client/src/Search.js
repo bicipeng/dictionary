@@ -9,24 +9,20 @@ class Cover extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
+
     handleChange(evt) {
         this.setState({
             input: evt.target.value
         })
 
     }
-    // setWord(){
-    //     this.setState({
-    //         word:this.state.input
-    //     })
-    // }
 
     async handleSubmit() {
         try {
-            
+
             const res = await axios.get(`http://localhost:5000/${this.state.input}`)
             if (res.status === 200) {
-               
+
                 this.setState({
                     definition: [...this.state.definition, res.data],
                     word: this.state.input,
@@ -40,35 +36,8 @@ class Cover extends Component {
         } catch (error) {
             console.log(error)
         }
-        // this.setState({
-        //     word: this.state.input,
-
-        // })
-
-
-
     }
-    // async callApi() {
-    //     try {
 
-    //         const res = await axios.get(`http://localhost:5000/${this.state.word}`)
-    //         if (res.status === 200) {
-    //             this.setState({
-    //                 definition: [...this.state.definition, res.data]
-    //             })
-    //         }
-
-
-
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-
-    // }
-    // componentDidMount() {
-    //     console.log("definition in component:", this.state.definition)
-    //     this.handleSubmit()
-    // }
     componenetDidUpdate() {
 
         if (!this.state.beforSumit) {
@@ -76,17 +45,17 @@ class Cover extends Component {
                 input: ""
             })
         }
-
     }
 
     render() {
 
         const definition = this.state.definition
         const word = this.state.word
+
         return (<div className="search">
 
             <input onChange={this.handleChange} placeholder="serach ..." />
-            <button onClick={this.handleSubmit}><i class="fas fa-search"></i></button>
+            <button onClick={this.handleSubmit}><i className="fas fa-search"></i></button>
             {definition && word ? <Definition definition={definition} word={word} /> : null}
         </div>);
     }
