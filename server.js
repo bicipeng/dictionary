@@ -2,14 +2,13 @@ const express = require("express")
 const app = express()
 const https = require("https")
 const cors = require("cors")
+const {app_id, app_key} = require ("./config")
 app.use(express.json({ extended: false }))
 app.use(cors())
 app.get("/:word", async (req, res) => {
 
     const source_lang = "en-us"
-    const app_id = "c31cc20e"
-
-    const app_key = "82a9d374a5144f8941696fb4e49928dd"
+//    const {app_id, app_key} = require ("./config")
     const fields = "definitions"
     const strictMatch = "false"
     const options = {
