@@ -41,7 +41,7 @@ app.get("/:word", async (req, res) => {
             let result = definitionARrr[0]
             let definition = result["definitions"]
             let output = definition[0]
-
+console.log("here is output",output)
             res.send(output)
         });
     });
