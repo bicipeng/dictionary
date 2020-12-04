@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios"
 import Definition from "./Definition"
+import "./Search.css"
 class Cover extends Component {
     constructor(props) {
         super(props);
@@ -42,11 +43,14 @@ class Cover extends Component {
     componentDidMount(){
      this.callApi()
     }
+    componentWillUnmount(){
+
+    }
     render() {
-        return (<div>
-            <h1>Dictionary App</h1>
-            <input onChange={this.handleChange} />
-            <button onClick={this.handleSubmit}>Search</button>
+        return (<div className="search">
+            
+            <input onChange={this.handleChange} placeholder="Search..."/>
+            <button onClick={this.handleSubmit}><i class="fas fa-search"></i></button>
            
 <h2>{this.state.definition}</h2>
          

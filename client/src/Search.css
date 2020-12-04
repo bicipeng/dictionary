@@ -1,0 +1,21 @@
+.search{
+    
+    height: 95px;
+    padding-top: 25px;
+  
+}
+input{
+   
+    align-items: center;
+    height: 30px;
+    width: 30%;
+    border: 1px solid grey;
+    
+   
+}
+button{
+    height: 34px;
+    width:50px;
+    border: 1px solid grey;
+    background-color: white;
+}
