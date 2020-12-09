@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import "./Search.css"
 const SearchBar = (props) => {
     const [searchValue, setSearchValue] = useState("")
     const handleSearchInputChanges = e => {
@@ -14,8 +15,8 @@ const SearchBar = (props) => {
        resetInputField()
     }
     return (<form className="search">
-        <input value={searchValue} onChange={handleSearchInputChanges} type="text" />
-        <input onClick={callSearchFunction} type="submit" value="SEARCH" />
+        <input  value={searchValue} onChange={handleSearchInputChanges} type="text" placeholder="Search..." />
+        <input className="buton" onClick={callSearchFunction} type="submit" value="SEARCH" />
 
 
     </form>);

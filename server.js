@@ -31,41 +31,51 @@ app.get("/:word", async (req, res) => {
             body += d;
         });
         resp.on('end', () => {
-            const defined=[]
+//there should be a better way to access data, s.a. using recursion, will come back to it later
             let parsed = JSON.parse(body);
-                        let results = parsed.results
-                        let wordObj = results[0]
-                        let entries = wordObj['lexicalEntries']
-                        let entry = entries[0]//obj{entries:[]}
-                        let sense = entry["entries"]
-                        let senses = sense[0]
+            let results = parsed.results
+            let wordObj = results[0]
+            let entries = wordObj['lexicalEntries']
+            let entry = entries[0]//obj{entries:[]}
+            let sense = entry["entries"]
+            let senses = sense[0]
 
-                        let definitionARrr = senses["senses"]
-                        let result = definitionARrr[0]
-                        // let definition = result["definitions"]
-                        // let output = definition[0]
-            console.log("here is output",result)
-            // const output = extractDetail(parsed)
-            // console.log("here is the output", output)
-            let def = result["definitions"]
-            for(let ele of def){
-                defined.push(ele)
-            }
-            let subSenses= result["subsenses"]//array
-            for(let el of subSenses){
-                if(el[ "definitions"]){
+            let definitionARrr = senses["senses"]
+            let result = definitionARrr[0]
+
+            const defined = []
+
+            let subSenses = result["subsenses"]//array
+            for (let el of subSenses) {
+                if (el["definitions"]) {
                     defined.push(el["definitions"][0])
                 }
-                console.log("el",el)
+
             }
-            let wordClass =[]
-let content=entries[0]
-for(let keys in content){
-    if(keys === "lexicalCategory" ){
-        wordClass.push(content["lexicalCategory"].id)
-    }
-}
-            res.send({defined,wordClass})
+            let wordClass = []
+            for (let ele of entries) {
+                if (ele["lexicalCategory"]) {
+                    wordClass.push(ele["lexicalCategory"].id)
+                }
+
+            }
+
+            for (let el of entries) {
+
+                let devDef = el["entries"][0]
+
+                for (let key in devDef) {
+                    if (devDef["senses"]) {
+                        let sen = devDef["senses"]
+                        for (let def of sen) {
+                            if (def["definitions"]) {
+                                defined.push(def["definitions"][0])
+                            }
+                        }
+                    }
+                }
+            }
+            res.send({ defined, wordClass })
         });
     });
 

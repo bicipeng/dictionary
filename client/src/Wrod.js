@@ -1,8 +1,12 @@
 import React from 'react';
 
-const Word = ({ definition, word }) => {
+const Word = ({ definition, searchWord, wordClass }) => {
     return (<React.Fragment>
-        {definition ? (<div><h2>definition:</h2>
+        {definition && searchWord ? (<div>
+
+            <div><h2>{searchWord}</h2>
+                <h3>{wordClass.toString()}</h3>
+            </div>
             <ul>
                 {
                     definition.map((def, idx) => (<div key={idx}><li > {def}</li></div>))

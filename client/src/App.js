@@ -1,17 +1,18 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import "./App.css"
 import Navbar from "./Navbar"
-
 import Word from "./Wrod"
 import SearchBar from "./SearchBar"
 import Axios from "axios"
 
-import Cover from "./Search"
+
 const App = () => {
   const [loading, setLoading] = useState(false)
   const [defintions, setDefinition] = useState([])
   const [errorMessage, setErrorMessage] = useState(null)
+  const [word, setWord] = useState("")
+  const [wordClass, setWordClass] = useState([])
   // useEffect(() => {
   //   // const fetchData = async () => {
   //   //   const respond = await Axios.get(`http://localhost:5000/`)
@@ -32,22 +33,27 @@ const App = () => {
   }
   const search = searchValue => {
     setLoading(true);
-    setErrorMessage(null)
-    setDefinition([])
+
+    // setDefinition([])
+
     const fetchData = async (input) => {
-      const respond = await Axios.get(`http://localhost:5000/${input}`)
-      console.log("here is the data", respond.data)
+      try {
+        const respond = await Axios.get(`http://localhost:5000/${input}`)
+        console.log("here is the data", respond.data)
 
-      if (respond.status === 200) {
-        console.log("definition,",defintions) 
+        if (respond.status === 200) {
+          console.log("definition,", defintions)
           setDefinition([respond.data["defined"]])
+          setWordClass([respond.data["wordClass"]])
           setLoading(false)
-        
+          setWord(input)
 
-      } else {
-        setErrorMessage(respond.error)
+        }
+      } catch (error) {
+        setErrorMessage("Error Occured...")
         setLoading(false)
       }
+
     }
 
 
@@ -57,17 +63,14 @@ const App = () => {
   return (<div className="App">
     <Navbar text="HOOKED" />
     <SearchBar search={search} resetDefintion={resetDefintion} />
-    <p className="App-intro">Sharing a few of our favourite movies</p>
     <div className="movies">
-      {loading && !errorMessage ? (
+      {loading && (errorMessage !== null) ? (
         <span>loading...</span>
-      ) : errorMessage ? (
-        <div className="errorMessage">{errorMessage}</div>
-      ) : (
-            defintions.map((def, idx) => (
-              <Word key={idx} definition={def} />
-            ))
-          )}
+      ) : errorMessage ? (<div>{errorMessage}</div>) : (
+        defintions.map((def, idx) => (
+          <Word key={idx} definition={def} searchWord={word} wordClass={wordClass} />
+        ))
+      )}
     </div>
   </div>);
 }
