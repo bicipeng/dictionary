@@ -1,0 +1,21 @@
+ul{
+    list-style-type: square ;
+}
+.defined{
+    display: flex;
+   padding-left: 38%;
+  padding-bottom:5px;
+   margin-left:auto;
+
+ 
+}
+.defined li{
+    text-align: left;
+   
+}
+.word{
+     border:1px dotted grey;
+}
+h2{
+    color:rgb(107, 86, 86);
+}

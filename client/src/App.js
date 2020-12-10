@@ -6,35 +6,18 @@ import Word from "./Wrod"
 import SearchBar from "./SearchBar"
 import Axios from "axios"
 
-
 const App = () => {
   const [loading, setLoading] = useState(false)
   const [defintions, setDefinition] = useState([])
   const [errorMessage, setErrorMessage] = useState(null)
   const [word, setWord] = useState("")
   const [wordClass, setWordClass] = useState([])
-  // useEffect(() => {
-  //   // const fetchData = async () => {
-  //   //   const respond = await Axios.get(`http://localhost:5000/`)
-  //   //   console.log("here in useeffect", respond)
-  //   //   if (respond.status === 200) {
-  //   //     setDefinition(respond.data)
-  //   //     setLoading(false)
-  //   //   }
-  //   // }
-  //   // fetchData()
-  //   console.log("definitions",defintions)
-  //   if(defintions.length>=1){
-  //     setDefinition([])
-  //   }
-  // }, [])
+
   const resetDefintion = () => {
     setDefinition([])
   }
   const search = searchValue => {
     setLoading(true);
-
-    // setDefinition([])
 
     const fetchData = async (input) => {
       try {
@@ -56,10 +39,9 @@ const App = () => {
 
     }
 
-
     fetchData(searchValue)
-
-  }
+ }
+ 
   return (<div className="App">
     <Navbar text="HOOKED" />
     <SearchBar search={search} resetDefintion={resetDefintion} />

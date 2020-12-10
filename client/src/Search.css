@@ -4,7 +4,7 @@
     padding-top: 25px;
   
 }
-.input{
+input{
    
     align-items: center;
     height: 30px;
@@ -13,8 +13,8 @@
     
    
 }
-.button{
-    height: 50px;
+button{
+    height: 34px;
     width:50px;
     border: 1px solid grey;
     background-color: white;
