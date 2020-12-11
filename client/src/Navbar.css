@@ -1,9 +1,5 @@
 .Navbar{
     background-image: url(./dict.jpg);
-   /* display: flex; */
-   /* align-items: flex-start; */
-   /* justify-content: center;
-   display: flex; */
    height: 150px;
     
 }
@@ -12,11 +8,7 @@ h3{
     font-weight: bold;
     color:rgb(170, 114, 114);   
 }
-/* h1{
-    padding-top:50px;
-    padding-bottom: 70px;
-    padding-left: 44%;
-}  */
+
 h1{
     padding-top: 28px;
 }
