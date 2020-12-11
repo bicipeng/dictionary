@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express()
 const https = require("https")
+const path = require ("path")
 const cors = require("cors")
 const { app_id, app_key } = require("./config")
 
@@ -80,12 +81,8 @@ app.get("/:word", async (req, res) => {
     });
 
 })
-if(process.env.NPDE_ENV==="production"){
-    app.use(express.static('client/build'))
-    app.get("*",(req,res)=>{
-        res.sendFile(path.resolve(__dirname,'client',"build",'index.html'))
-    })
-}
+
+app.use(express.static(path.join(__dirname,'build')))
 
 // app.use('/',require('./'))
 const PORT = process.env.PORT || 5000
