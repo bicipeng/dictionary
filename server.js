@@ -1,7 +1,6 @@
 const express = require("express")
 const app = express()
 const https = require("https")
-const path = require ("path")
 const cors = require("cors")
 const { app_id, app_key } = require("./config")
 
@@ -32,7 +31,7 @@ app.get("/:word", async (req, res) => {
             body += d;
         });
         resp.on('end', () => {
-//there should be a better way to access data, s.a. using recursion, will come back to it later
+            //there should be a better way to access data, s.a. using recursion, will come back to it later
             let parsed = JSON.parse(body);
             let results = parsed.results
             let wordObj = results[0]
@@ -82,9 +81,7 @@ app.get("/:word", async (req, res) => {
 
 })
 
-app.use(express.static(path.join(__dirname,'build')))
 
-// app.use('/',require('./'))
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => console.log(`listening on port ${PORT}`))
 
