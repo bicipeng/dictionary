@@ -41,12 +41,8 @@ app.get("/:word", async (req, res) => {
             let senses = sense[0]
 
             let definitionARrr = senses["senses"]
-            let result = definitionARrr[0]
-
             const defined = []
-
-            let subSenses = result["subsenses"]//array
-            for (let el of subSenses) {
+            for (let el of definitionARrr) {
                 if (el["definitions"]) {
                     defined.push(el["definitions"][0])
                 }

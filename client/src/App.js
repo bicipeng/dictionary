@@ -33,7 +33,7 @@ const App = () => {
 
         }
       } catch (error) {
-        setErrorMessage("Error Occured...")
+        setErrorMessage("Error Occured...Check your spelling")
         setLoading(false)
       }
 
@@ -46,7 +46,7 @@ const App = () => {
     <Navbar text="HOOKED" />
     <SearchBar search={search} resetDefintion={resetDefintion} />
     <div className="movies">
-      {loading && (errorMessage !== null) ? (
+      {loading  ? (
         <span>loading...</span>
       ) : errorMessage ? (<div>{errorMessage}</div>) : (
         defintions.map((def, idx) => (

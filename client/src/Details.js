@@ -17,16 +17,16 @@ class details extends Component {
         }
     }
     render() {
-console.log("props.word",this.props.word)
+        console.log("props.word", this.props.word)
         return (<React.Fragment>
-            {this.state.definition.length!==0 ? (<div>
+            {this.state.definition.length !== 0 ? (<div>
                 <h2>{this.props.word}:</h2>
-            {/* <h3>{this.state.definition[1].toString()}</h3> */}
-            <ul>
-            {
-                    this.state.definition.map((def, idx) => (<div><li key={idx}> {def}</li></div>))
-                }
-            </ul>
+
+                <ul>
+                    {
+                        this.state.definition.map((def, idx) => (<div><li key={idx}> {def}</li></div>))
+                    }
+                </ul>
             </div>) : null}
         </React.Fragment>);
     }
